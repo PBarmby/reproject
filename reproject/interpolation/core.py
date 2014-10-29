@@ -45,8 +45,6 @@ def get_input_pixels_celestial(wcs_in, wcs_out, shape_out):
 
     xp_out_check, yp_out_check = wcs_out.wcs_world2pix(xw_out, yw_out, 0)
 
-    print(xp_out, xp_out_check, yp_out, yp_out_check)
-
     reset = (np.abs(xp_out - xp_out_check) > 1) | (np.abs(yp_out - yp_out_check) > 1)
 
     xp_in[reset] = np.nan
