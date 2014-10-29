@@ -29,7 +29,8 @@ def convert_world_coordinates(xw_in, yw_in, wcs_in, wcs_out):
     data = UnitSphericalRepresentation(xw_in * xw_in_unit,
                                        yw_in * yw_in_unit)
 
-    coords_in = SkyCoord(data, frame=frame_in.name, **frame_in.get_frame_attr_names())
+    # WHAT WHAT WHAT:
+    coords_in = SkyCoord(data, frame=frame_in.name, **dict((key, getattr(frame_in, key)) for key in frame_in.get_frame_attr_names().keys()))
     coords_out = coords_in.transform_to(frame_out)
 
     xw_unit_out = u.Unit(wcs_out.wcs.cunit[0])
